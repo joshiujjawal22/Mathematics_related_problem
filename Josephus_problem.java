@@ -1,4 +1,4 @@
-// To find n=(2^a)+l; further find=2*l+1;
+// ______To find n=(2^a)+l; further find=2*l+1;
 
 import java.util.Scanner;
 class Josephus{

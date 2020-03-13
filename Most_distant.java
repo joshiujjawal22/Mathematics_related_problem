@@ -8,15 +8,36 @@ public class Solution {
 
     // Complete the solve function below.
     static double solve(int[][] c) {
-     double max=0;
+//         Naive Solution in O(n*n)
+//      double max=0;
        
-         for(int i=0;i<c.length-1;i++){
-             for(int j=i+1;j<c.length;j++){
-     double s=Math.sqrt(Math.pow((c[i][0]-c[j][0]),2)+Math.pow((c[i][1]-c[j][1]),2));
-     if(s>max) max=s;}
+//          for(int i=0;i<c.length-1;i++){
+//              for(int j=i+1;j<c.length;j++){
+//      double s=Math.sqrt(Math.pow((c[i][0]-c[j][0]),2)+Math.pow((c[i][1]-c[j][1]),2));
+//      if(s>max) max=s;}
+//         }
+//         return max;
+//     }
+        
+        
+//     Efficient method to solve the problem in O(n)
+     double max_x=0,min_x=0,max_y=0,min_y=0;
+         
+        for(int i=0;i<c.length;i++)
+        {   if(min_x>c[i][0]) min_x=c[i][0];
+            if(min_y>c[i][1]) min_y=c[i][1];
+            if(max_x<c[i][0]) max_x=c[i][0];
+            if(max_y<c[i][1]) max_y=c[i][1];
         }
+        double max=max_x-min_x;
+        if(max_y-min_y>max) max=max_y-min_y;
+        if(Math.sqrt(Math.pow((max_x),2)+Math.pow((min_y),2))>max) max=Math.sqrt(Math.pow((max_x),2)+Math.pow((min_y),2));
+        if(Math.sqrt(Math.pow((max_x),2)+Math.pow((max_y),2))>max) max=Math.sqrt(Math.pow((max_x),2)+Math.pow((max_y),2)); 
+if(Math.sqrt(Math.pow((min_x),2)+Math.pow((min_y),2))>max) max=Math.sqrt(Math.pow((min_x),2)+Math.pow((min_y),2));
+        if(Math.sqrt(Math.pow((min_x),2)+Math.pow((max_y),2))>max) max=Math.sqrt(Math.pow((min_x),2)+Math.pow((max_y),2)); 
         return max;
-          }
+        
+    }
 
     private static final Scanner scanner = new Scanner(System.in);
 

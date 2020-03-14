@@ -11,26 +11,27 @@ public class Solution {
     // Complete the substrCount function below.
     static long substrCount(int n, String s) {
         
-        int c=0;
-        for(int i=0;i<=n-1;i++)
-        {  
-            for(int j=i+1;j<=n;j++)
-            {
-            if(check(s.substring(i,j))) c++;
-            }   
+            long count = 0;
+    for (int i = 0; i < s.length(); i++) {
+        int innerCounter = 1;
+
+        int counterDown = 0;
+        int counterUp = 1;
+        while (i - innerCounter >= 0 && i + innerCounter < s.length()
+                && s.charAt(i - innerCounter) == s.charAt(i - 1) && s.charAt(i + innerCounter) == s.charAt(i - 1)) {
+            count++;
+            innerCounter++;
         }
-        return c;
+
+        while (i - counterDown >= 0 && i + counterUp < s.length() && s.charAt(i - counterDown) == s.charAt(i)
+                && s.charAt(i + counterUp) == s.charAt(i)) {
+            count++;
+            counterDown++;
+            counterUp++;
+        }
     }
-        static boolean check(String s){
-            int c=0;
-            int n=s.length();
-            for(int i=0;i<n-1;i++)
-            {
-                if(s.charAt(i)==s.charAt(i+1)) c++;    
-            }
-            if(c==n-1) return true;
-            else if(c==n-3 && n%2!=0 && s.charAt(n/2)!=s.charAt(0) && s.charAt(0)==s.charAt(n-1)) return true; 
-            else return false; 
+
+    return count + s.length();
         }
     
     
